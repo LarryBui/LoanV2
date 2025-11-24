@@ -1,0 +1,6 @@
+@OaigLoan.Bff_HostAddress = http://localhost:5277
+
+GET {{OaigLoan.Bff_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
