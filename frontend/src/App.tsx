@@ -16,7 +16,7 @@ type AuthResponse = {
   user: UserResponse
 }
 
-const fallbackBaseUrl = 'http://localhost:5277'
+const fallbackBaseUrl = 'http://localhost:5080'
 
 function App() {
   const [registerForm, setRegisterForm] = useState({
@@ -32,18 +32,18 @@ function App() {
   const [loading, setLoading] = useState(false)
 
   const baseUrl = useMemo(
-    () => import.meta.env.VITE_BFF_BASE_URL?.toString() ?? fallbackBaseUrl,
+    () => import.meta.env.VITE_API_BASE_URL?.toString() ?? fallbackBaseUrl,
     []
   )
 
   const handleRegister = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    submitAuth('/bff/auth/register', registerForm)
+    submitAuth('/auth/register', registerForm)
   }
 
   const handleLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    submitAuth('/bff/auth/login', loginForm)
+    submitAuth('/auth/login', loginForm)
   }
 
   const submitAuth = async (path: string, payload: object) => {
@@ -97,14 +97,14 @@ function App() {
     <main className="shell">
       <header className="hero">
         <div>
-          <p className="eyebrow">OaigLoan BFF playground</p>
+          <p className="eyebrow">OaigLoan API playground</p>
           <h1>Auth-ready starter</h1>
           <p className="lede">
-            Register or sign in through the BFF. Responses echo the JWT issued
+            Register or sign in through the API. Responses echo the JWT issued
             by the backend API so you can wire the rest of the app quickly.
           </p>
           <p className="meta">
-            Target BFF URL:{' '}
+            Target API URL:{' '}
             <span className="code">{baseUrl.replace(/\/$/, '')}</span>
           </p>
         </div>
@@ -231,7 +231,7 @@ function App() {
         <div className="panel">
           <div className="panel__header">
             <h3>Result</h3>
-            <p>Responses from the BFF are displayed here.</p>
+            <p>Responses from the API are displayed here.</p>
           </div>
           <div className="result">
             {status ? <p>{status}</p> : <p>Run a request to see the output.</p>}
